@@ -5,16 +5,6 @@ ini_set('display_errors', 1);
 
 require_once('_config.php');
 
-$query = "SELECT * FROM emergency_waitlist.Staff";
-$result = pg_query($GLOBALS['db_conn'], $query);
-if (!$result) {
-    die("An error occurred.\n");
-}
-
-while ($row = pg_fetch_assoc($result)) {
-    echo $row['staff_id'] . " " . $row['name'] . " " . $row['username'] . " " . $row['login_code'] . "<br>";
-}
-
 
 /** set the global variables in the  $GLOBALS["viewables"] array, which stores data to be used in the view
  * head_title: Sets the title of the page.
@@ -22,16 +12,28 @@ while ($row = pg_fetch_assoc($result)) {
 */ 
 $GLOBALS["viewables"]["head_title"] = "Homepage";
 $GLOBALS["viewables"]["route"] = "homepage";
+$GLOBALS["viewables"]["h1"] = \emergency_waitlist\Message::getWelcomeMessage();
 
-//Get the username from the form
-$username = $_POST["username"] ?? null;
-$code = $_POST["3-letter code"] ?? null;
+// get the POST data
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Capture and sanitize POST data
+    $role = isset($_POST['role']) ? $_POST['role'] : null;
+    $username = isset($_POST['username']) ? $_POST['username'] : null;
+    $login_code = isset($_POST['3-letter code']) ? $_POST['3-letter code'] : null;
 
-try {
-    $GLOBALS["viewables"]["h1"] = \emergency_waitlist\Message::getWelcomeMessage();
-} catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    // Store username in viewables to be used in another view
+    $GLOBALS["viewables"]["username"] = $username;
+
+    // change the route to the appropriate view file when button is pressed
+    if ($role == "Staff") {
+        $GLOBALS["viewables"]["head_title"] = "Staff Page";
+        $GLOBALS["viewables"]["route"] = "staff";
+    } else if ($role == "Patient") {
+        $GLOBALS["viewables"]["route"] = "patient";
+    }
 }
+
+
 
 // render the layout for the page
 require_view('layout/layout');

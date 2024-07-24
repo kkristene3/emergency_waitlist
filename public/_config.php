@@ -5,8 +5,8 @@ ini_set('display_errors', 1);
 /**
  * DATABASE CONFIGURATION
  */
-$dbHost = 'localhost'; // Use 'localhost' if Docker is running on the same host
-$dbPort = '5432'; // Default PostgreSQL port
+$dbHost = 'localhost';
+$dbPort = '5432';
 $dbName = 'postgres';
 $dbUser = 'postgres';
 $dbPassword = 'Soobin1!';
