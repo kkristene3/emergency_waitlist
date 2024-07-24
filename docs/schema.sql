@@ -22,6 +22,8 @@ CREATE TABLE Patient
         name VARCHAR(255),
         username VARCHAR(255) UNIQUE,
         login_code VARCHAR(3),
+        severity INT,
+        CHECK (severity >= 0 AND severity <= 5),
         arrival_time TIME,
         PRIMARY KEY (patient_id)
     );
@@ -45,9 +47,9 @@ VALUES
 
 -- SAMPLE PATIENT TABLE INSERTION
 INSERT INTO Patient
-    (name, username, login_code, arrival_time)
+    (name, username, login_code, severity, arrival_time)
 VALUES
-    ('John Smith', 'jhsmith', '123',  localtime);
+    ('John Smith', 'fsd', '123', 0,  localtime);
 
 -- SELECTION STATEMENTS
 SELECT

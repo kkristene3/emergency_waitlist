@@ -10,11 +10,30 @@
 
 body {
     background-color: var(--tea-green);
+    font-family: "Poppins", sans-serif;
 }
 
 h1 {
     color: white;
-    font-family: "Poppins", sans-serif;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+h2 {
+    color: var(--papaya-whip);
+    text-shadow: 2px 2px 4px #000000;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 20px;
+    margin-right: 50px;
 }
 
 button {
@@ -24,11 +43,74 @@ button {
     font-weight: 600;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 15px 25px;
     cursor: pointer;
+    margin: auto 0;
 }
 
-#header {
+#signout-btn {
+    background-color: var(--papaya-whip);
+    color: black;
+}
+
+#action-btns {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.action-content {
+    margin: 0 20% 0 20%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: #000000;
+    margin: 20px 0;
+    text-align: center;
+}
+
+th {
+    background-color: var(--beige);
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+.action-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-row label {
+    width: 150px;
+    margin-right: 10px;
+}
+
+form button {
+    align-self: center;
+    margin-top: 10px;
+}
+
+#add-patient {
+    display: none;
+}
+
+#remove-patient {
+    display: none;
 }
