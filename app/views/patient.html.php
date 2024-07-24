@@ -13,8 +13,8 @@ $result = pg_query($GLOBALS['db_conn'], $query);
 if ($result) {
     $row = pg_fetch_row($result);
     if ($row) {
-        $name = htmlspecialchars($row[0]); // Escape the output for safety
-        $GLOBALS["viewables"]["h3"] = \emergency_waitlist\Message::getPatientWelcomeMessage($name);
+        $name = htmlspecialchars($row[0]); // get name of user
+        $GLOBALS["viewables"]["h3"] = \emergency_waitlist\Message::getPatientWelcomeMessage($name); // get welcome message
     }
 }
 ?>

@@ -4,5 +4,8 @@
  */
 namespace emergency_waitlist;
 
+class QueueList {
+
+}
 
 ?>
