@@ -11,8 +11,8 @@ CREATE TABLE Staff
     (
         staff_id SERIAL,
         name VARCHAR(255),
-        username VARCHAR(255),
-        loginCode VARCHAR(3),
+        username VARCHAR(255) UNIQUE,
+        login_code VARCHAR(3),
         PRIMARY KEY (staff_id)
     );
 
@@ -20,22 +20,22 @@ CREATE TABLE Patient
     (
         patient_id SERIAL,
         name VARCHAR(255),
-        username VARCHAR(255),
-        loginCode VARCHAR(3),
-        arrivalTime TIME,
+        username VARCHAR(255) UNIQUE,
+        login_code VARCHAR(3),
+        arrival_time TIME,
         PRIMARY KEY (patient_id)
     );
 
 CREATE TABLE Queue
     (
         patient_id INT,
-        waitTime TIME,
+        wait_time TIME,
         FOREIGN KEY (patient_id) REFERENCES Patient
     );
 
 -- STAFF TABLE INSERTIONS
 INSERT INTO Staff
-    (name, username, loginCode)
+    (name, username, login_code)
 VALUES
     ('Kralexah Saleris', 'kxsaleris', 'ASK'),
     ('Jimin Park', 'jmpark', 'BTS'),
@@ -45,12 +45,14 @@ VALUES
 
 -- SAMPLE PATIENT TABLE INSERTION
 INSERT INTO Patient
-    (name, username, loginCode, arrivalTime)
+    (name, username, login_code, arrival_time)
 VALUES
     ('John Smith', 'jhsmith', '123',  localtime);
 
 -- SELECTION STATEMENTS
 SELECT
-    arrivalTime AT TIME ZONE 'UTC' AT TIME ZONE 'America/New_York' AS est_time
+    arrival_time AT TIME ZONE 'UTC' AT TIME ZONE 'America/New_York' AS est_time
 FROM
     Patient;
+
+SELECT name FROM emergency_waitlist.Staff
