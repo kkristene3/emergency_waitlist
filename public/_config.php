@@ -9,7 +9,7 @@ $dbHost = 'localhost';
 $dbPort = '5432';
 $dbName = 'postgres';
 $dbUser = 'postgres';
-$dbPassword = 'Soobin1!';
+$dbPassword = 'password';
 
 // Create a connection string
 $connString = "host=$dbHost port=$dbPort dbname=$dbName user=$dbUser password=$dbPassword";
