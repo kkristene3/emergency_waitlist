@@ -9,24 +9,28 @@ drop table patient;
 -- TABLE CREATIONS
 CREATE TABLE Staff
     (
+        staff_id SERIAL,
         name VARCHAR(255),
         username VARCHAR(255),
-        loginCode VARCHAR(3)
+        loginCode VARCHAR(3),
+        PRIMARY KEY (staff_id)
     );
 
 CREATE TABLE Patient
     (
-        patientID SERIAL PRIMARY KEY,
+        patient_id SERIAL,
         name VARCHAR(255),
         username VARCHAR(255),
         loginCode VARCHAR(3),
-        arrivalTime TIME
+        arrivalTime TIME,
+        PRIMARY KEY (patient_id)
     );
 
 CREATE TABLE Queue
     (
-        patient_id INT REFERENCES Patient(patientID),
-        waitTime TIME
+        patient_id INT,
+        waitTime TIME,
+        FOREIGN KEY (patient_id) REFERENCES Patient
     );
 
 -- STAFF TABLE INSERTIONS
@@ -46,3 +50,7 @@ VALUES
     ('John Smith', 'jhsmith', '123',  localtime);
 
 -- SELECTION STATEMENTS
+SELECT
+    arrivalTime AT TIME ZONE 'UTC' AT TIME ZONE 'America/New_York' AS est_time
+FROM
+    Patient;
