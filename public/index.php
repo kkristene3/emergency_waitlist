@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $GLOBALS["viewables"]["head_title"] = "Staff Page";
         $GLOBALS["viewables"]["route"] = "staff";
     } else if ($role == "Patient") {
+        $GLOBALS["viewables"]["head_title"] = "Patient Page";
         $GLOBALS["viewables"]["route"] = "patient";
     }
 }
