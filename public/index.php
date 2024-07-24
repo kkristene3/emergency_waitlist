@@ -5,7 +5,6 @@ ini_set('display_errors', 1);
 
 require_once('_config.php');
 
-
 /** set the global variables in the  $GLOBALS["viewables"] array, which stores data to be used in the view
  * head_title: Sets the title of the page.
  * route: Specifies which view file to include (in this case, homepage).
@@ -16,7 +15,6 @@ $GLOBALS["viewables"]["h1"] = \emergency_waitlist\Message::getWelcomeMessage();
 
 // get the POST data
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Capture and sanitize POST data
     $role = isset($_POST['role']) ? $_POST['role'] : null;
     $username = isset($_POST['username']) ? $_POST['username'] : null;
     $login_code = isset($_POST['3-letter code']) ? $_POST['3-letter code'] : null;
@@ -32,8 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $GLOBALS["viewables"]["route"] = "patient";
     }
 }
-
-
 
 // render the layout for the page
 require_view('layout/layout');
