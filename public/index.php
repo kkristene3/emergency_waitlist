@@ -67,12 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     else if (isset($_POST['signOut'])) {
         // Perform sign out operations
-    
-        // Example: Unset all session variables
+        // TO DO: Unset all session variables
         $_SESSION = array();
     
-        // If it's desired to kill the session, also delete the session cookie.
-        // Note: This will destroy the session, and not just the session data!
+        // If it's desired to kill the session, also delete the session cookie
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
             setcookie(session_name(), '', time() - 42000,
@@ -83,9 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
         // Finally, destroy the session.
         session_destroy();
-    
-        // If you're not redirecting, you might want to send a success message
-        echo "Signed out successfully.";
     } else {
         // Handle the case where signOut wasn't set in the POST request
         http_response_code(400); // Bad Request
