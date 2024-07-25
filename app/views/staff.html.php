@@ -18,9 +18,6 @@ if ($result) {
     }
 }
 
-// Get the patient list
-$query = "SELECT * FROM emergency_waitlist.Patient";
-$result = pg_query($GLOBALS['db_conn'], $query);
 ?>
 
 <!-- ---------------- The HTML content for the staff page ---------------- -->
@@ -43,6 +40,9 @@ $result = pg_query($GLOBALS['db_conn'], $query);
         </tr>
         <!-- Patient information will be displayed here -->
         <?php
+        // Get the patient list
+        $query = "SELECT * FROM emergency_waitlist.Patient";
+        $result = pg_query($GLOBALS['db_conn'], $query);
         if ($result) {
             while ($row = pg_fetch_row($result)) {
                 echo "<tr>";
@@ -74,10 +74,11 @@ $result = pg_query($GLOBALS['db_conn'], $query);
 </div>
 
 <!-- Divs that will appear depending on which action button was clicked -->
-<div id="add-patient" class="action-form">
+ <!-- Add Patient Form -->
+<div id="add-patient" class="action-form" action="../app/views/staff.html.php">
     <h2>Add Patient</h2>
     <p>Enter the patient's name, username, and login code to add them to the waitlist.</p>
-    <form id="add-patient-form">
+    <form id="add-patient-form"  method="POST">
         <div class="form-row">
             <label for="patient-name">Patient Name:</label>
             <input type="text" id="patient-name" name="patient-name" required>
@@ -94,17 +95,17 @@ $result = pg_query($GLOBALS['db_conn'], $query);
             <label for="patient-severity">Patient Severity:</label>
             <input type="number" id="patient-severity" name="patient-severity" required min="0" max="5">
         </div>
-        <button type="submit">Add Patient</button>
+        <button type="submit" name="new-patient-form">Add Patient</button>
     </form>
 </div>
 
-
+<!-- Remove Patient Form -->
 <div id="remove-patient" class="action-form">
     <h2>Remove Patient</h2>
     <p>Enter the Patient ID of the patient you would like to remove.</p>
     <form id="remove-patient-form">
         <label for="patient-id">Patient ID:</label>
         <input type="text" id="patient-id" name="patient-id" required>
-        <button type="submit">Remove Patient</button>
+        <button type="submit" name="remove-patient">Remove Patient</button>
     </form>
 </div>

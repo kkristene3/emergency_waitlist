@@ -12,5 +12,5 @@
     <label for="3-letter-code">3-letter code: </label>
     <input name="3-letter-code" placeholder="3-letter code" required>
     <br>
-    <button>Go</button>
+    <button name="sign-in-form">Go</button>
 </form>

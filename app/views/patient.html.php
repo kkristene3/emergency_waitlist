@@ -22,7 +22,7 @@ if ($result) {
 <!DOCTYPE html>
 <div id="header">
     <h1><?php echo g("h3") ?></h1>
-    <button>Sign Out</button>
+    <button id="signout-btn">Sign Out</button>
 </div>
 
 <!-- Patient Information appears at the bottom of the page -->
