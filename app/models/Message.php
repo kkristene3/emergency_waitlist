@@ -20,7 +20,7 @@ class Message
      */
     public static function getStaffWelcomeMessage($name)
     {
-        return "Welcome to the staff page $name!";
+        return "WELCOME TO THE STAFF PAGE $name!";
     }
 
     /**
@@ -28,7 +28,7 @@ class Message
      */
     public static function getPatientWelcomeMessage($name)
     {
-        return "Welcome to the patient page $name!";
+        return "WELCOME TO THE PATIENT PAGE $name!";
     }
 }
 ?>
