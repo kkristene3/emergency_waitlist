@@ -28,7 +28,7 @@ class Message
      */
     public static function getPatientWelcomeMessage($name)
     {
-        return "Welcome to the patient page $name!";
+        return "WELCOME TO THE PATIENT PAGE $name!";
     }
 }
 ?>

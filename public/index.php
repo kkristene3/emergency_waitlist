@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else if ($role == "Patient") {
         $GLOBALS["viewables"]["head_title"] = "Patient Page";
         $GLOBALS["viewables"]["route"] = "patient";
+        $GLOBALS["viewables"]["stylesheet"] = "patient";
+        $GLOBALS["viewables"]["javascript"] = "patient";
     }
 }
 

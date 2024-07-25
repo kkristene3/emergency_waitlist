@@ -23,11 +23,11 @@ $query = "SELECT * FROM emergency_waitlist.Patient";
 $result = pg_query($GLOBALS['db_conn'], $query);
 ?>
 
+<!-- ---------------- The HTML content for the staff page ---------------- -->
 <!DOCTYPE html>
-
 <div id="header">
-<h1><?php echo g("h2") ?></h1>
-<button id="signout-btn">SIGN OUT</button>
+    <h1><?php echo g("h2") ?></h1>
+    <button id="signout-btn">SIGN OUT</button>
 </div>
 
 <!-- Patient List appears at the top of the page -->
