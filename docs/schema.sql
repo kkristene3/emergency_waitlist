@@ -23,7 +23,6 @@ CREATE TABLE Patient
         username VARCHAR(255) UNIQUE,
         login_code VARCHAR(3),
         severity INT,
-        CHECK (severity >= 0 AND severity <= 5),
         arrival_time TIME,
         PRIMARY KEY (patient_id)
     );
@@ -49,7 +48,17 @@ VALUES
 INSERT INTO Patient
     (name, username, login_code, severity, arrival_time)
 VALUES
-    ('John Smith', 'fsd', '123', 0,  localtime);
+    ('John Smith', 'jhsmith', '123', 0,  localtime);
+
+INSERT INTO Patient
+    (name, username, login_code, severity, arrival_time)
+    VALUES
+    ('Jaesang Park', 'jspark', 'PSY', '2', localtime);
+
+INSERT INTO Queue
+    (patient_id, wait_time)
+VALUES
+    (1, localtime);
 
 -- SELECTION STATEMENTS
 SELECT
@@ -58,3 +67,9 @@ FROM
     Patient;
 
 SELECT name FROM emergency_waitlist.Staff
+
+SELECT Patient.patient_id, Patient.name, Queue.wait_time
+FROM Patient
+INNER JOIN Queue
+ON Patient.patient_id=Queue.patient_id;
+

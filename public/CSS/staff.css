@@ -65,8 +65,10 @@ button {
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    border: #000000;
+    border-collapse: separate;
+    border-spacing: 0; 
+    border-radius: 10px;
+    overflow: hidden;
     margin: 20px 0;
     text-align: center;
 }
@@ -76,7 +78,7 @@ th {
 }
 
 table, th, td {
-    border: 1px solid black;
+    border: 1px solid var(--cornsilk);
 }
 
 .action-form {
