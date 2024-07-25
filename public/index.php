@@ -18,28 +18,53 @@ $GLOBALS["viewables"]["h1"] = \emergency_waitlist\Message::getWelcomeMessage();
 $GLOBALS["viewables"]["stylesheet"] = "index";
 $GLOBALS["viewables"]["javascript"] = "index";
 
+$role = '';
+
 // get the POST data
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST['sign-in-form'])) {
         $role = isset($_POST['role']) ? $_POST['role'] : null;
         $username = isset($_POST['username']) ? $_POST['username'] : null;
-        $login_code = isset($_POST['3-letter code']) ? $_POST['3-letter code'] : null;
-
-        // Store username in viewables to be used in another view
-        $GLOBALS["viewables"]["username"] = $username;
+        $login_code = isset($_POST['3-letter-code']) ? $_POST['3-letter-code'] : null;
 
         // change the route to the appropriate view file when button is pressed
         if ($role == "Staff") {
-            $GLOBALS["viewables"]["head_title"] = "Staff Page";
-            $GLOBALS["viewables"]["route"] = "staff";
-            $GLOBALS["viewables"]["stylesheet"] = "staff";
-            $GLOBALS["viewables"]["javascript"] = "staff";
+            $query = "SELECT * FROM emergency_waitlist.Staff WHERE username = '$username' AND login_code = '$login_code'";
+            $result = pg_query($GLOBALS['db_conn'], $query);
+
+            $row = pg_fetch_row($result);
+            if (!empty($row)){
+                // Store username in viewables to be used in another view
+                $GLOBALS["viewables"]["username"] = $username;
+                $GLOBALS["viewables"]["head_title"] = "Staff Page";
+                $GLOBALS["viewables"]["route"] = "staff";
+                $GLOBALS["viewables"]["stylesheet"] = "staff";
+                $GLOBALS["viewables"]["javascript"] = "staff";
+            } 
+            else{
+                echo "<script>alert('Either usernane or password incorrect. Please try again')</script>";
+            }         
         } else if ($role == "Patient") {
-            $GLOBALS["viewables"]["head_title"] = "Patient Page";
-            $GLOBALS["viewables"]["route"] = "patient";
-            $GLOBALS["viewables"]["stylesheet"] = "patient";
-            $GLOBALS["viewables"]["javascript"] = "patient";
+            $query = "SELECT * FROM emergency_waitlist.Patient WHERE username = '$username' AND login_code = '$login_code'";
+            $result = pg_query($GLOBALS['db_conn'], $query);
+
+            $row = pg_fetch_row($result);
+            if (!empty($row)){
+                // Store username in viewables to be used in another view
+                $GLOBALS["viewables"]["username"] = $username;
+                $GLOBALS["viewables"]["head_title"] = "Patient Page";
+                $GLOBALS["viewables"]["route"] = "patient";
+                $GLOBALS["viewables"]["stylesheet"] = "patient";
+                $GLOBALS["viewables"]["javascript"] = "patient";
+            }
+            else{
+                echo "<script>alert('Either usernane or password incorrect. Please try again')</script>";
+            }
+            
+        }
+        else{
+            echo "<script>alert('Please indicate whether you are a patient or a staff member')</script>";
         }
     }
 
