@@ -27,7 +27,7 @@ if (isset($_POST["new-patient-form"])) {
         // reset the POST data
         $_POST = array();
 
-        // Add the patient to the waiting list
+        // Use the TableInsertion.php to add the patient to the waiting list
         $result = emergency_waitlist\TableInsertion::insertPatientIntoWaitingList($username);
         if ($result) {
             echo "<script>alert('Patient added to the waiting list.')</script>";

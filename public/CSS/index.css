@@ -8,7 +8,74 @@
     --buff: #d4a373ff;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: var(--cornsilk);
     font-family: "Poppins", sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-content-box {
+    background-color: var(--papaya-whip);
+    border: var(--buff) 5px solid;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 700px;
+    height: 550px;
+    box-shadow: 2px 2px 4px var(--buff);
+}
+
+h1 {
+    color: var(--buff);
+    text-shadow: 2px 2px 4px white;
+}
+
+h2 {
+    color: var(--tea-green);
+    text-shadow: 2px 2px 4px white;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+div {
+    margin: 20px;
+}
+
+#role-selection {
+    margin-top: 20px;
+    display: block;
+    justify-content: center;
+}
+
+button {
+    background-color: var(--buff);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 25px;
+    cursor: pointer;
+    margin: 10px auto 0;
+}
+
+input[type="radio"] {
+    cursor: pointer;
 }
