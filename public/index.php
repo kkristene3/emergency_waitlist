@@ -35,14 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $row = pg_fetch_row($result);
             if (!empty($row)){
-                // Store username in viewables to be used in another view
-                $GLOBALS["viewables"]["username"] = $username;
+                // Store username in the session
+                $_SESSION['username'] = $username;
+
                 $GLOBALS["viewables"]["head_title"] = "Staff Page";
                 $GLOBALS["viewables"]["route"] = "staff";
                 $GLOBALS["viewables"]["stylesheet"] = "staff";
                 $GLOBALS["viewables"]["javascript"] = "staff";
-            } 
-            else{
+                header("Location: staff.php");
+            } else{
                 echo "<script>alert('Either usernane or password incorrect. Please try again')</script>";
             }         
         } else if ($role == "Patient") {
@@ -51,15 +52,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $row = pg_fetch_row($result);
             if (!empty($row)){
-                // Store username in viewables to be used in another view
-                $GLOBALS["viewables"]["username"] = $username;
+                // Store username in the session
+                $_SESSION['username'] = $username;
+
                 $GLOBALS["viewables"]["head_title"] = "Patient Page";
                 $GLOBALS["viewables"]["route"] = "patient";
                 $GLOBALS["viewables"]["stylesheet"] = "patient";
                 $GLOBALS["viewables"]["javascript"] = "patient";
-            }
-            else{
-                echo "<script>alert('Either usernane or password incorrect. Please try again')</script>";
+                header("Location: patient.php");
+            } else{
+                echo "<script>alert('Either username or password incorrect. Please try again')</script>";
             }
             
         }
@@ -68,34 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Check if the form was submitted to add a patient
-    else if (isset($_POST["new-patient-form"])) {
-        // Get the form data
-        $name = htmlspecialchars($_POST["patient-name"]);
-        $username = htmlspecialchars($_POST["patient-username"]);
-        $login_code = htmlspecialchars($_POST["patient-login-code"]);
-        $severity = (int)$_POST["patient-severity"];
-        $arrivalTime = date('Y-m-d H:i:s'); // Get the current date and time
-        
-        // Use the TableInsertion.php to insert the patient into the database
-        $result = emergency_waitlist\TableInsertion::insertPatient($name, $username, $login_code, $severity, $arrivalTime);
-
-        if ($result) {
-            echo "<script>alert('Patient added successfully!')</script>";
-            // do a partial refresh while keeping the current view
-            
-        } else {
-            echo "<script>alert('Failed to add patient. Please try again.')</script>";
-            //echo json_encode(['success' => false]);
-        }
-    }
-
     else if (isset($_POST['signOut'])) {
-        // Perform sign out operations
-        // TO DO: Unset all session variables
-        $_SESSION = array();
+        // Unset all session variables
+        $_SESSION = array();    
     
-        // If it's desired to kill the session, also delete the session cookie
+        //  delete the session cookie
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
             setcookie(session_name(), '', time() - 42000,
@@ -104,12 +83,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             );
         }
     
-        // Finally, destroy the session.
+        // destroy the session.
         session_destroy();
-    } else {
-        // Handle the case where signOut wasn't set in the POST request
-        http_response_code(400); // Bad Request
-        echo "Invalid request.";
+        // Respond with a success message
+        http_response_code(200);
+        echo "Signed out successfully";
     }
 }
 

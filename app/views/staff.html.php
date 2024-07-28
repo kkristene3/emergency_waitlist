@@ -2,8 +2,10 @@
 // connect to the database
 require_once('_config.php');
 
-// Get the username from the viewables
-$username = isset($GLOBALS["viewables"]["username"]) ? htmlspecialchars($GLOBALS["viewables"]["username"]) : '';
+// get username from session
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
+
+echo "<script>console.log('username: $username')</script>";
 
 // Get information from the database
 $query = "SELECT name FROM emergency_waitlist.Staff WHERE username = '$username'";
@@ -93,7 +95,7 @@ if ($result) {
         </div>
         <div class="form-row">
             <label for="patient-severity">Patient Severity:</label>
-            <input type="number" id="patient-severity" name="patient-severity" required min="0" max="5">
+            <input type="number" id="patient-severity" name="patient-severity" required min="1" max="5">
         </div>
         <button type="submit" name="new-patient-form">Add Patient</button>
     </form>
