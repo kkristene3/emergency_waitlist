@@ -22,24 +22,20 @@ if (isset($_POST["new-patient-form"])) {
     $result = emergency_waitlist\TableInsertion::insertPatient($name, $username, $login_code, $severity, $arrivalTime);
 
     if ($result) {
-        echo "<script>alert('Patient added successfully!')</script>";
-        
-        // reset the POST data
-        $_POST = array();
-
+        $_SESSION['alert'] = 'Patient added successfully!';
         // Use the TableInsertion.php to add the patient to the waiting list
         $result = emergency_waitlist\TableInsertion::insertPatientIntoWaitingList($username);
-        if ($result) {
-            echo "<script>alert('Patient added to the waiting list.')</script>";
-
-        } else {
-            echo "<script>alert('Failed to add patient to the waiting list.')</script>";
-        }
-        
     } else {
-        echo "<script>alert('Failed to add patient. Please try again.')</script>";
-        //echo json_encode(['success' => false]);
+        $_SESSION['alert'] = 'Failed to add patient. Please try again.';
     }
+    // Redirect to the same page to clear the form data
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+}
+// Check for alert messages in the session and display them
+if (isset($_SESSION['alert'])) {
+    echo "<script>alert('" . $_SESSION['alert'] . "');</script>";
+    unset($_SESSION['alert']); // Clear the alert message from the session
 }
 
 require_view('layout/layout');

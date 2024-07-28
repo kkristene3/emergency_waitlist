@@ -31,7 +31,7 @@ if ($result) {
 
 <!-- Patient List appears at the top of the page -->
 <div id="patient-list">
-    <h2>Patient List</h2>
+    <h2>PATIENT LIST</h2>
     <table>
         <tr>
             <th>Patient ID</th>
@@ -90,8 +90,8 @@ if ($result) {
             <input type="text" id="patient-username" name="patient-username" required>
         </div>
         <div class="form-row">
-            <label for="patient-login-code">Patient Login Code:</label>
-            <input type="text" id="patient-login-code" name="patient-login-code" required>
+            <label for="patient-login-code">Patient 3-Digit Login Code:</label>
+            <input type="text" id="patient-login-code" name="patient-login-code" pattern="[A-Za-z0-9]{3}" required>
         </div>
         <div class="form-row">
             <label for="patient-severity">Patient Severity:</label>

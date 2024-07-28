@@ -93,6 +93,6 @@ if ($result) {
 
 <!-- Leave Queue Button -->
 <div id="leave-queue">
-    <button>Leave Queue</button>
+    <button id="leave-btn">Leave Queue</button>
 </div>
 

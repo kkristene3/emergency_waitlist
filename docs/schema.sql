@@ -20,13 +20,12 @@ CREATE TABLE Patient
         login_code VARCHAR(3),
         severity INT,
         arrival_time TIME,
-        PRIMARY KEY (patient_id)
+        PRIMARY KEY (username)
     );
 
 CREATE TABLE Queue
     (
-        patient_id INT,
-        wait_time TIME,
-        FOREIGN KEY (patient_id) REFERENCES Patient
+        username VARCHAR(255),
+        wait_time INT,
+        FOREIGN KEY (username) REFERENCES Patient
     );
-
