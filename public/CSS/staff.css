@@ -11,6 +11,7 @@
 body {
     background-color: var(--tea-green);
     font-family: "Poppins", sans-serif;
+    z-index: 1000;
 }
 
 h1 {
@@ -49,8 +50,8 @@ button {
 }
 
 #signout-btn {
-    background-color: var(--papaya-whip);
-    color: black;
+    background-color: var(--buff);
+    color: var(--cornsilk);
 }
 
 #action-btns {
@@ -60,7 +61,7 @@ button {
 }
 
 .action-content {
-    margin: 0 20% 0 20%;
+    margin: 50px 20% 0 20%;
 }
 
 table {
@@ -115,4 +116,9 @@ form button {
 
 #remove-patient {
     display: none;
+}
+
+#patient-list{
+    max-width: 75%;
+    margin: 0 auto;
 }

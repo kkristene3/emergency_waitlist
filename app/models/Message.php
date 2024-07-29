@@ -12,7 +12,7 @@ class Message
      */
     public static function getWelcomeMessage()
     {
-        return "Sign in to view the waitlist";
+        return "WELCOME TO THE EMERGENCY WAITLIST SYSTEM!";
     }
 
     /**

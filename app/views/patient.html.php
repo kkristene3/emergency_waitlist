@@ -2,8 +2,8 @@
 // connect to the database
 require_once('_config.php');
 
-// Get the username from the viewables
-$username = isset($GLOBALS["viewables"]["username"]) ? htmlspecialchars($GLOBALS["viewables"]["username"]) : '';
+// get username from session
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 
 // Get information from the database
 $query = "SELECT name FROM emergency_waitlist.Patient WHERE username = '$username'";
@@ -22,7 +22,7 @@ if ($result) {
 <!DOCTYPE html>
 <div id="header">
     <h1><?php echo g("h3") ?></h1>
-    <button id="signout-btn">Sign Out</button>
+    <button id="signout-btn">SIGN OUT</button>
 </div>
 
 <!-- Patient Information appears at the bottom of the page -->
@@ -38,17 +38,17 @@ if ($result) {
         </tr>
         <!-- Patient information will be displayed here -->
         <?php
-        $query = "SELECT * FROM emergency_waitlist.Patient WHERE username = '$username'";
+        $query = "SELECT name, username, login_code, severity, arrival_time FROM emergency_waitlist.Patient WHERE username = '$username'";
         $result = pg_query($GLOBALS['db_conn'], $query);
         if ($result) {
             while ($row = pg_fetch_row($result)) {
                 echo "<tr>";
+                echo "<td>" . htmlspecialchars($row[0]) . "</td>";
                 echo "<td>" . htmlspecialchars($row[1]) . "</td>";
                 echo "<td>" . htmlspecialchars($row[2]) . "</td>";
                 echo "<td>" . htmlspecialchars($row[3]) . "</td>";
-                echo "<td>" . htmlspecialchars($row[4]) . "</td>";
                 // convert the timestamp to a human-readable format
-                $dateTime = new DateTime($row[5]);
+                $dateTime = new DateTime($row[4]);
                 $estTimezone = new DateTimeZone('America/New_York'); // Set the timezone to Eastern Time (ET)
                 $dateTime->setTimezone($estTimezone);
                 $formattedDate = $dateTime->format('d/m/Y H:i:s'); // Format the date and time
@@ -67,14 +67,15 @@ if ($result) {
         <tr>
             <th>Number in Queue</th>
             <th>Name</th>
-            <th>Wait Time</th>
+            <th>Wait Time (mins)</th>
         </tr>
         <!-- Queue information will be displayed here -->
         <?php
         // Get the queue list
         $query = "SELECT Patient.name, Queue.wait_time
         FROM emergency_waitlist.Patient
-        INNER JOIN emergency_waitlist.Queue ON Patient.patient_id = Queue.patient_id";
+        INNER JOIN emergency_waitlist.Queue ON Patient.username= Queue.username
+        ORDER BY wait_time ASC";
 
         $result = pg_query($GLOBALS['db_conn'], $query);
         if ($result) {
@@ -83,12 +84,7 @@ if ($result) {
                 echo "<tr>";
                 echo "<td>" . $i++ . "</td>";
                 echo "<td>" . htmlspecialchars($row[0]) . "</td>";
-                // convert the timestamp to a human-readable format
-                $dateTime = new DateTime($row[1]);
-                $estTimezone = new DateTimeZone('America/New_York'); // Set the timezone to Eastern Time (ET)
-                $dateTime->setTimezone($estTimezone);
-                $formattedDate = $dateTime->format('d/m/Y H:i:s'); // Format the date and time
-                echo "<td>" . htmlspecialchars($formattedDate) . "</td>";
+                echo "<td>" . htmlspecialchars($row[1]) . "</td>";
             }
         }
         ?>
@@ -97,6 +93,6 @@ if ($result) {
 
 <!-- Leave Queue Button -->
 <div id="leave-queue">
-    <button>Leave Queue</button>
+    <button id="leave-btn">Leave Queue</button>
 </div>
 

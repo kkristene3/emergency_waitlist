@@ -26,4 +26,26 @@ class TableInsertion {
         }
         return true;
     }
+
+    /**
+     * Insert a new patient into the waiting list.
+     * @param $username string The patient's username.
+     * @return bool True if the patient was successfully inserted, false otherwise.
+     */
+    public static function insertPatientIntoWaitingList ($username) {
+        // calcualte the wait time based on patient's severity
+        $query = "SELECT severity FROM emergency_waitlist.Patient WHERE username = '$username'";
+        $result = pg_query($GLOBALS['db_conn'], $query);
+        $row = pg_fetch_row($result);
+        $severity = (int)$row[0];
+        $waitTime = $severity * 10; // 10 minutes per severity level
+
+        // add the patient to the waitlist
+        $query = "INSERT INTO emergency_waitlist.Queue (username, wait_time) VALUES ('$username', '$waitTime')";
+        $result = pg_query($GLOBALS['db_conn'], $query);
+        if (!$result) {
+            return false;
+        }
+        return true;
+    }
 }
