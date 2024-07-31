@@ -63,7 +63,7 @@ $dbPassword = 'YOUR_PASSWORD';
 
     1. Navigate to the db folder and open `schema.sql`.
     2. Copy and paste the queries into a console in Postgres and run it
-    3. Open the `seed.sql` file and repeat step 2.2
+    3. Open the `seed.sql` file and repeat step 2.ii
 
 3. Start up the PHP server.
 ```bash
@@ -102,15 +102,18 @@ $dbPassword = 'YOUR_PASSWORD';
   `ADD A PICTURE FOR THE WAITING QUEUE LIST`
 
   - Staff can perform two actions
+    
     ![staff-actions](/docs/imgs/staff-actions.png)
 
     - Add a Patient
+      
     ![add-patient](/docs/imgs/add-patient.png)
 
     - Remove a Patient
+      
     ![remove-patient](/docs/imgs/remove-patient.png)
 
   ### User Perspective
   - If logged in as a patient, you can 
 
-  `PLEASE FINISH THE USER PERSPECTIVE SUMMARY AND INSERT AN IMAGE OF THEIR SCREEN WITH A BRIEF BULLET POINT`
+    `PLEASE FINISH THE USER PERSPECTIVE SUMMARY AND INSERT AN IMAGE OF THEIR SCREEN WITH A BRIEF BULLET POINT`
