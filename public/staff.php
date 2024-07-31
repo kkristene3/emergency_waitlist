@@ -32,6 +32,31 @@ if (isset($_POST["new-patient-form"])) {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
+
+//check if the form was submitted to remove a patient
+if (isset($_POST["remove-patient"])){
+    //Get the form data
+    $id = htmlspecialchars($_POST['patient-id']);
+
+    $result = emergency_waitlist\TableDeletion::deletePatient($id);
+
+    /*$query = "SELECT username FROM emergency_waitlist.Patient WHERE patient_id = '$id'";
+    $result = pg_query($GLOBALS['db_conn'], $query);
+    $row = pg_fetch_row($result);*/
+
+    if ($result){
+        //$_SESSION['alert'] = htmlspecialchars($row[0]);
+        $_SESSION['alert'] = 'Patient removed successfully';
+        
+    }
+    else{
+        $_SESSION['alert'] = 'Failed to remove patient. Please try again.';
+    }
+    // Redirect to the same page to clear the form data
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+
+}
 // Check for alert messages in the session and display them
 if (isset($_SESSION['alert'])) {
     echo "<script>alert('" . $_SESSION['alert'] . "');</script>";
