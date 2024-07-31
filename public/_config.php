@@ -1,5 +1,27 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
+/**
+ * DATABASE CONFIGURATION
+ */
+$dbHost = 'localhost';
+$dbPort = '5432';
+$dbName = 'postgres';
+$dbUser = 'postgres';
+$dbPassword = 'password';
+
+// Create a connection string
+$connString = "host=$dbHost port=$dbPort dbname=$dbName user=$dbUser password=$dbPassword";
+
+// Establish a connection to the database
+$conn = pg_connect($connString);
+if (!$conn) {
+  die("Connection failed: " . pg_last_error());
+}
+
+// Global variables
+$GLOBALS['db_conn'] = $conn;
 $GLOBALS["appDir"] = resolve_path("app");
 $GLOBALS["viewables"] = array();
 
