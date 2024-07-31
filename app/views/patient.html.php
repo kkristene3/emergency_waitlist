@@ -93,6 +93,8 @@ if ($result) {
 
 <!-- Leave Queue Button -->
 <div id="leave-queue">
-    <button id="leave-btn">Leave Queue</button>
+    <form id="remove-patient-form" method="POST">
+        <button type="submit" name="leave-btn">Leave Queue</button>
+    </form>
 </div>
 

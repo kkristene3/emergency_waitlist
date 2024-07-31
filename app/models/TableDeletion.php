@@ -48,8 +48,31 @@ class TableDeletion{
 
     }
 
-    public static function removePatientFromWaitingList($id){
+    public static function removePatientWithUsername($username){
+        $query = "SELECT * FROM emergency_waitlist.Patient WHERE username = '$username'";
+        $result = pg_query($GLOBALS['db_conn'], $query);
+        $row = pg_fetch_row($result);
 
+        if (empty($row)){
+            return false;
+        }
+        else{
+            //delete the user from the queue
+            $query1 = "DELETE FROM emergency_waitlist.Queue WHERE username = '$username'";
+
+            $result1 = pg_query($GLOBALS['db_conn'], $query1);
+
+            if ($result1){
+                //delete the user from the patient list
+                $query = "DELETE FROM emergency_waitlist.Patient WHERE username = '$username'";
+                $result = pg_query($GLOBALS['db_conn'], $query);
+
+                if($result){
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
 }
