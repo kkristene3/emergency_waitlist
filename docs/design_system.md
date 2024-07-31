@@ -22,4 +22,5 @@ The Staff and Patient page have a Welcome Message displayed in the top left.
 
 ## Sign Out
 At the top right of the Staff and Patient page is the `Sign Out` button.
+
 ![sign-out-btn](imgs/sign-out-btn.png)
