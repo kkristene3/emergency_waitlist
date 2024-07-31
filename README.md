@@ -30,9 +30,9 @@ To ensure your database can connect to the application, you will need to know yo
 See [here](#reconfigure-config-for-postgres) for instructions on how to change `_config.php`
 
 #### Reconfigure Config for Postgres
-[!IMPORTANT] If your postgres configuration is not the default and you do not want to change your Postgres configuration, you will have to change the `_config.php` to match your setup to run the application.
-
-The default configuration written in the `_config.php` is:
+>[!IMPORTANT]
+>If your postgres configuration is not the default and you do not want to change your Postgres configuration, you will have to change the `_config.php` to match your setup to run the application.
+>The default configuration written in the `_config.php` is:
 ```
 hostname = 'localhost';
 port = '5432';
