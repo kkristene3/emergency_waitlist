@@ -65,6 +65,10 @@ class TableInsertion {
             $prevSeverity = (int)$row[0];
 
             $waitTime = $prevWaitTime + ($prevSeverity*5);
+
+            if ($prevSeverity == 0){
+                $waitTime = $prevWaitTime + 2;
+            }
             
             // add the patient to the waitlist
             $query = "INSERT INTO emergency_waitlist.Queue (username, wait_time) VALUES ('$username', '$waitTime')";

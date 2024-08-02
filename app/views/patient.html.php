@@ -66,25 +66,25 @@ if ($result) {
     <table>
         <tr>
             <th>Number in Queue</th>
-            <th>Name</th>
             <th>Wait Time (mins)</th>
         </tr>
         <!-- Queue information will be displayed here -->
         <?php
         // Get the queue list
-        $query = "SELECT Patient.name, Queue.wait_time
+        $query = "SELECT Patient.username, Queue.wait_time
         FROM emergency_waitlist.Patient
-        INNER JOIN emergency_waitlist.Queue ON Patient.username= Queue.username
-        ORDER BY wait_time ASC";
+        INNER JOIN emergency_waitlist.Queue ON Patient.username= Queue.username";
 
         $result = pg_query($GLOBALS['db_conn'], $query);
         if ($result) {
             $i = 1;
             while ($row = pg_fetch_row($result)) {
-                echo "<tr>";
-                echo "<td>" . $i++ . "</td>";
-                echo "<td>" . htmlspecialchars($row[0]) . "</td>";
-                echo "<td>" . htmlspecialchars($row[1]) . "</td>";
+                if (htmlspecialchars($row[0]) == $username){
+                    echo "<tr>";
+                    echo "<td>" . $i . "</td>";
+                    echo "<td>" . htmlspecialchars($row[1]) . "</td>";
+                }
+                $i++;
             }
         }
         ?>
