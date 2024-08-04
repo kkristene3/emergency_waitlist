@@ -113,7 +113,7 @@ if ($result) {
     <p>Enter the Patient ID of the patient you would like to remove.</p>
     <form id="remove-patient-form" method="POST">
         <label for="patient-id">Patient ID:</label>
-        <input type="text" id="patient-id" name="patient-id" required>
+        <input type="number" id="patient-id" name="patient-id" required min="1" required>
         <button type="submit" name="remove-patient">Remove Patient</button>
     </form>
 </div>
