@@ -86,7 +86,7 @@ $dbPassword = 'YOUR_PASSWORD';
         | jypark    | JYP
         | mklee     | NCT
         
-    -   Existing staff accounts:
+    -   Existing user accounts:
 
         | Username  | 3-letter Code
         | :---:     | ---
