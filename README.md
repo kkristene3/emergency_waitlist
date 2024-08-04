@@ -93,13 +93,9 @@ $dbPassword = 'YOUR_PASSWORD';
         | jhsmith   | 123
   
   ### Admin Perspective
-  - Staff can view the current patients in the hospital
+  - Staff can view the current patients in the hospital as well as their estimated wait time
 
-  `PLEASE INSERT PICTURE FOR THE TABLES WITH THE LIST OF PATIENTS`
-
-  - Staff can view the waiting list
-
-  `ADD A PICTURE FOR THE WAITING QUEUE LIST`
+    ![staff-page](/docs/imgs/staff-page.png)
 
   - Staff can perform two actions
     
@@ -114,6 +110,14 @@ $dbPassword = 'YOUR_PASSWORD';
     ![remove-patient](/docs/imgs/remove-patient.png)
 
   ### User Perspective
-  - If logged in as a patient, you can 
+  - Patients can view their account information
 
-    `PLEASE FINISH THE USER PERSPECTIVE SUMMARY AND INSERT AN IMAGE OF THEIR SCREEN WITH A BRIEF BULLET POINT`
+    ![patient-account-info](/docs/imgs/patient-account-info.png) 
+
+  - Patients can view their current spot on the wait list and their estimated wait time
+
+    ![patient-waiting-list](/docs/imgs/patient-waiting-list.png)
+
+  - Patients can remove themselves from the wait list
+
+    ![leave-queue](/docs/imgs/leave-queue.png)
