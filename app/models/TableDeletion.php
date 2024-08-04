@@ -86,15 +86,15 @@ class TableDeletion{
 
             if ($result1){
                 //change the wait-time of everything that comes after it
-                $query = "SELECT username, wait_time FROM emergency_waitlist.Queue WHERE wait_time >= '$wait_time'";
+                $query = "SELECT username, wait_time FROM emergency_waitlist.Queue WHERE wait_time > '$wait_time'";
                 $result = pg_query($GLOBALS['db_conn'], $query);
 
                 while($row = pg_fetch_row($result)){
-                    $username = htmlspecialchars($row[0]);
+                    $otherUsername = htmlspecialchars($row[0]);
                     $wait_time = (int)$row[1];
 
                     $newWaitTime = $wait_time - $severity*5;
-                    $query1 = "UPDATE emergency_waitlist.Queue SET wait_time = '$newWaitTime' WHERE username='$username'";
+                    $query1 = "UPDATE emergency_waitlist.Queue SET wait_time = '$newWaitTime' WHERE username='$otherUsername'";
                     $result1 = pg_query($GLOBALS['db_conn'], $query1);
                 }
 
