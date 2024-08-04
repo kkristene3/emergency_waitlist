@@ -27,13 +27,17 @@ extension=pdo_sql
 ### Postgres
 To ensure your database can connect to the application, you will need to know your Postgres' username and password. If your `username` is not `postgres` and your `password` is not `password`, you will either have to change your postgres data to that, or change it in the _config file. 
 
-See [here](#reconfigure-config-for-postgres) for instructions on how to change `_config.php`
+See [here](#steps-to-alter-config-file) for instructions on how to change `_config.php`
 
 #### Reconfigure Config for Postgres
 >[!IMPORTANT]
 >If your postgres configuration is not the default and you do not want to change your Postgres configuration, you will have to change the `_config.php` to match your setup to run the application.
 >The default configuration written in the `_config.php` is:
+
 ```
+/**
+ * DATABASE CONFIGURATION
+ */
 hostname = 'localhost';
 port = '5432';
 database name = 'postgres';
@@ -46,6 +50,9 @@ password = 'password';
 2. Change the Database Configuration values to your postgres setup and save the file. Ex.
 
 ```
+/**
+ * DATABASE CONFIGURATION
+ */
 $dbHost = 'YOUR_HOSTNAME';
 $dbPort = 'YOUR_PORT_NUMBER';
 $dbName = 'YOUR_DATABASE_NAME';
