@@ -40,12 +40,7 @@ if (isset($_POST["remove-patient"])){
 
     $result = emergency_waitlist\TableDeletion::deletePatient($id);
 
-    /*$query = "SELECT username FROM emergency_waitlist.Patient WHERE patient_id = '$id'";
-    $result = pg_query($GLOBALS['db_conn'], $query);
-    $row = pg_fetch_row($result);*/
-
     if ($result){
-        //$_SESSION['alert'] = htmlspecialchars($row[0]);
         $_SESSION['alert'] = 'Patient removed successfully';
         
     }

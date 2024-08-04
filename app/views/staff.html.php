@@ -39,11 +39,16 @@ if ($result) {
             <th>Username</th>
             <th>Severity</th>
             <th>Arrival Time (EST)</th>
+            <th>Est. Wait Time</th>
         </tr>
         <!-- Patient information will be displayed here -->
         <?php
         // Get the patient list
-        $query = "SELECT * FROM emergency_waitlist.Patient";
+        // Get the queue list
+        $query = "SELECT Patient.patient_id, Patient.name, Patient.username, Patient.severity, Patient.arrival_time, Queue.wait_time
+        FROM emergency_waitlist.Patient
+        INNER JOIN emergency_waitlist.Queue ON Patient.username= Queue.username
+        ORDER BY wait_time ASC";
         $result = pg_query($GLOBALS['db_conn'], $query);
         if ($result) {
             while ($row = pg_fetch_row($result)) {
@@ -51,13 +56,14 @@ if ($result) {
                 echo "<td>" . htmlspecialchars($row[0]) . "</td>";
                 echo "<td>" . htmlspecialchars($row[1]) . "</td>";
                 echo "<td>" . htmlspecialchars($row[2]) . "</td>";
-                echo "<td>" . htmlspecialchars($row[4]) . "</td>";
+                echo "<td>" . htmlspecialchars($row[3]) . "</td>";
                 // convert the timestamp to a human-readable format
-                $dateTime = new DateTime($row[5]);
+                $dateTime = new DateTime($row[4]);
                 $estTimezone = new DateTimeZone('America/New_York'); // Set the timezone to Eastern Time (ET)
                 $dateTime->setTimezone($estTimezone);
                 $formattedDate = $dateTime->format('d/m/Y H:i:s'); // Format the date and time
                 echo "<td>" . htmlspecialchars($formattedDate) . "</td>";
+                echo "<td>" . htmlspecialchars($row[5]) . "</td>";
                 echo "</tr>";
             }
         }
@@ -107,7 +113,7 @@ if ($result) {
     <p>Enter the Patient ID of the patient you would like to remove.</p>
     <form id="remove-patient-form" method="POST">
         <label for="patient-id">Patient ID:</label>
-        <input type="text" id="patient-id" name="patient-id" required>
+        <input type="number" id="patient-id" name="patient-id" required min="1" required>
         <button type="submit" name="remove-patient">Remove Patient</button>
     </form>
 </div>

@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $GLOBALS["viewables"]["javascript"] = "staff";
                 header("Location: staff.php");
             } else{
-                echo "<script>alert('Either usernane or password incorrect. Please try again')</script>";
+                echo "<script>alert('Username or password is incorrect. Please try again.')</script>";
             }         
         } else if ($role == "Patient") {
             $query = "SELECT * FROM emergency_waitlist.Patient WHERE username = '$username' AND login_code = '$login_code'";
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $GLOBALS["viewables"]["javascript"] = "patient";
                 header("Location: patient.php");
             } else{
-                echo "<script>alert('Either username or password incorrect. Please try again')</script>";
+                echo "<script>alert('Username or password is incorrect. Please try again.')</script>";
             }
             
         }

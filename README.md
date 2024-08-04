@@ -27,13 +27,17 @@ extension=pdo_sql
 ### Postgres
 To ensure your database can connect to the application, you will need to know your Postgres' username and password. If your `username` is not `postgres` and your `password` is not `password`, you will either have to change your postgres data to that, or change it in the _config file. 
 
-See [here](#reconfigure-config-for-postgres) for instructions on how to change `_config.php`
+See [here](#steps-to-alter-config-file) for instructions on how to change `_config.php`
 
 #### Reconfigure Config for Postgres
 >[!IMPORTANT]
 >If your postgres configuration is not the default and you do not want to change your Postgres configuration, you will have to change the `_config.php` to match your setup to run the application.
 >The default configuration written in the `_config.php` is:
+
 ```
+/**
+ * DATABASE CONFIGURATION
+ */
 hostname = 'localhost';
 port = '5432';
 database name = 'postgres';
@@ -46,6 +50,9 @@ password = 'password';
 2. Change the Database Configuration values to your postgres setup and save the file. Ex.
 
 ```
+/**
+ * DATABASE CONFIGURATION
+ */
 $dbHost = 'YOUR_HOSTNAME';
 $dbPort = 'YOUR_PORT_NUMBER';
 $dbName = 'YOUR_DATABASE_NAME';
@@ -86,20 +93,16 @@ $dbPassword = 'YOUR_PASSWORD';
         | jypark    | JYP
         | mklee     | NCT
         
-    -   Existing staff accounts:
+    -   Existing user accounts:
 
         | Username  | 3-letter Code
         | :---:     | ---
         | jhsmith   | 123
   
   ### Admin Perspective
-  - Staff can view the current patients in the hospital
+  - Staff can view the current patients in the hospital as well as their estimated wait time
 
-  `PLEASE INSERT PICTURE FOR THE TABLES WITH THE LIST OF PATIENTS`
-
-  - Staff can view the waiting list
-
-  `ADD A PICTURE FOR THE WAITING QUEUE LIST`
+    ![staff-page](/docs/imgs/staff-page.png)
 
   - Staff can perform two actions
     
@@ -114,6 +117,14 @@ $dbPassword = 'YOUR_PASSWORD';
     ![remove-patient](/docs/imgs/remove-patient.png)
 
   ### User Perspective
-  - If logged in as a patient, you can 
+  - Patients can view their account information
 
-    `PLEASE FINISH THE USER PERSPECTIVE SUMMARY AND INSERT AN IMAGE OF THEIR SCREEN WITH A BRIEF BULLET POINT`
+    ![patient-account-info](/docs/imgs/patient-account-info.png) 
+
+  - Patients can view their current spot on the wait list and their estimated wait time
+
+    ![patient-waiting-list](/docs/imgs/patient-waiting-list.png)
+
+  - Patients can remove themselves from the wait list
+
+    ![leave-queue](/docs/imgs/leave-queue.png)
